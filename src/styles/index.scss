@@ -1,0 +1,31 @@
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+@import "./typography";
+
+// variables
+
+$poppin-regular: "Poppins-Regular", sans-serif;
+$poppin-bold: "Poppins-Bold", sans-serif;
+$body-bg: #f8f8f8;
+$black-color: #000;
+$blue-400: #33a0ff;
+$blue-500: #498ef6;
+$grey-200: #f6f7f8;
+$grey-500: #262626;
+$grey-600: #22262a;
+$red-400: #fb7181;
+$text-sm: 12px;
+$text-base: 16px;
+$text-lg: 18px;
+$text-xl: 20px;
+$text-2xl: 24px;
+$text-3xl: 32px;
+$nav-boxshadow: 0px 4px 4px rgba(215, 215, 215, 0.25);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

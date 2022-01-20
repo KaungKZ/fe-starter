@@ -1,18 +1,23 @@
-// import logo from './logo.svg';
-// import './App.css';
+import React from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import CartPage from "./CartPage";
+import HomePage from "./HomePage";
+import Navbar from "./Navbar";
+import NotFoundPage from "./NotFoundPage";
+// import { TransitionGroup, CSSTransition } from "react-transition-group";
+// import { ParallaxProvider } from "react-scroll-parallax";
 
 export default function App() {
+  const location = useLocation();
   return (
-    <div className="App text-3xl">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book. It has survived not only five centuries, but
-      also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+    <div className="App">
+      <Navbar />
+
+      <Routes location={location}>
+        <Route index path="/" element={<HomePage />}></Route>
+        <Route path="/cart" element={<CartPage />}></Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
