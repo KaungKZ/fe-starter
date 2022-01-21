@@ -1,0 +1,105 @@
+.lists-wrapper {
+  padding-top: 60px;
+
+  .list-wrapper {
+    margin-bottom: 60px;
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 250px);
+      column-gap: 54px;
+      row-gap: 25px;
+      margin-top: 45px;
+      margin-bottom: 45px;
+      grid-template-rows: manso;
+    }
+
+    .title {
+      @include section-title;
+    }
+
+    .seemore-list {
+      width: 100%;
+      text-align: center;
+      button {
+        border: 1px solid $blue-500;
+        background: none;
+        font-size: $text-md;
+        font-family: $poppin-regular;
+        border-radius: 25px;
+        padding: 7px 15px;
+        width: 150px;
+        cursor: pointer;
+        transition: all 300ms ease;
+        &:hover {
+          background: $blue-500;
+          color: $white-color;
+        }
+      }
+    }
+  }
+}
+
+.itemcard {
+  background: $white-color;
+  border-radius: 0 0 10px 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  &__banner {
+    img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+  }
+
+  &__content {
+    padding: 15px 15px 20px 15px;
+  }
+  &__description {
+    margin-top: 10px;
+    min-height: 85px;
+
+    p {
+      line-height: 21px;
+      font-size: $text-md;
+      font-family: $poppin-regular;
+    }
+  }
+  &__options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__seemore {
+    margin-left: 5px;
+    white-space: nowrap;
+    font-size: $text-md;
+    color: $blue-400;
+  }
+  &__price {
+    font-family: $poppin-bold;
+    font-size: $text-lg;
+    margin-right: 15px;
+  }
+
+  &__addtocart {
+    button {
+      // border: 1px solid $blue-500;
+      border: none;
+      border-radius: 15px;
+      padding: 5px 15px;
+      // background: none;
+      background: $blue-400;
+      font-family: $poppin-regular;
+      cursor: pointer;
+      font-size: $text-sm;
+      color: $white-color;
+      transition: all 300ms ease;
+      &:hover {
+        background: $blue-500;
+      }
+    }
+  }
+}
