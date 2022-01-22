@@ -25,7 +25,7 @@ export default function CartPage() {
         return (
           Object.keys(_toRemoveCheckedArray)
             .map((v) => parseInt(v))
-            .indexOf(item.id) == -1
+            .indexOf(item.id) === -1
         );
       });
 
