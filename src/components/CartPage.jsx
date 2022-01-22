@@ -1,12 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AddedItemsContext } from "./App";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import QuantityInput from "./QuantityInput";
 
 export default function CartPage() {
   const { addedItems, setAddedItems } = useContext(AddedItemsContext);
   const [isChecked, setIsChecked] = useState({});
   const [isCheckout, setIsCheckout] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll top when location changes
+    window.scrollTo(0, 0);
+  }, [location]);
 
   function handleRemoveItems() {
     if (isChecked["all"]) {
