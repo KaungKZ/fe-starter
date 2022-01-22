@@ -10,15 +10,11 @@
   background: $white-color;
   padding: 15px 0;
   box-shadow: $nav-boxshadow;
-
-  &__container {
-    // width: 90%;
-    // margin: 0 auto;
-  }
+  z-index: 1;
 
   &__ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   &__li {
@@ -52,5 +48,11 @@
 
   &__link {
     text-decoration: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav {
+    height: 75px;
   }
 }

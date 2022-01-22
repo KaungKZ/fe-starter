@@ -3,11 +3,13 @@ import React, { useRef } from "react";
 export default function QuantityInput({ item, addedItems, setAddedItems }) {
   const quantityRef = useRef();
   function handleQuantityChange(e, item) {
-    // console.log(item);
     let input = parseInt(e.target.value);
+    let maxValue = quantityRef.current.max;
 
     if (input <= 0 || isNaN(input)) {
       input = 1;
+    } else if (input > maxValue) {
+      input = maxValue;
     }
     let newItems = [...addedItems];
 
@@ -19,8 +21,6 @@ export default function QuantityInput({ item, addedItems, setAddedItems }) {
   }
 
   function handleProductSizeUp(item) {
-    //   const input = e.target.parentNode.parentNode.querySelector("input");
-
     let maxValue = quantityRef.current.max;
     var oldValue = parseFloat(quantityRef.current.value);
     if (oldValue >= maxValue) {
@@ -57,7 +57,6 @@ export default function QuantityInput({ item, addedItems, setAddedItems }) {
         value={item.qty ? item.qty : 1}
         ref={quantityRef}
         onChange={(e) => handleQuantityChange(e, item)}
-        // onChange={e => handleOnChange(e, item)}
       />
       <div className="quantity-nav">
         <div

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AddedItemsContext } from "./App";
 import { Link } from "react-router-dom";
 import QuantityInput from "./QuantityInput";
@@ -6,6 +6,7 @@ import QuantityInput from "./QuantityInput";
 export default function CartPage() {
   const { addedItems, setAddedItems } = useContext(AddedItemsContext);
   const [isChecked, setIsChecked] = useState({});
+  const [isCheckout, setIsCheckout] = useState(false);
 
   function handleRemoveItems() {
     if (isChecked["all"]) {
@@ -37,22 +38,30 @@ export default function CartPage() {
           Object.entries(isChecked).filter(([_, value]) => !value)
         )
       );
-
-      // setIsChecked(() => {
-      //   return {
-      //     all: isChecked["all"],
-      //     ...Object.fromEntries(
-      //       Object.entries(_toRemoveCheckedArray).filter(
-      //         ([key, value]) =>
-      //           _filteredItems.map((item) => item.id).indexOf(key) !== -1
-      //       )
-      //     ),
-      //   };
-      // });
     }
   }
 
-  // console.log(addedItems);
+  function handleCheckout() {
+    setAddedItems([]);
+    setIsChecked({});
+    setIsCheckout(true);
+  }
+
+  function calculateTotal() {
+    return addedItems
+      .reduce((acc, cur) => {
+        return (
+          Number(cur.pirce.replace(/[^0-9.-]+/g, "")) *
+            (cur.qty ? cur.qty : 1) +
+          acc
+        );
+      }, 0)
+      .toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  }
+
   return (
     <div className="cart-wrapper fixed-width-md">
       <div className="cart">
@@ -94,7 +103,7 @@ export default function CartPage() {
                         <path
                           d="M1 4.5L5 9L14 1"
                           strokeWidth="2"
-                          stroke={isChecked["all"] ? "#fff" : "none"}
+                          stroke={isChecked["all"] ? "#40BFFF" : "none"}
                         />
                       </svg>
                     </label>
@@ -103,7 +112,6 @@ export default function CartPage() {
                 <div className="cell">Items</div>
                 <div className="cell">Amount</div>
                 <div className="cell">Price</div>
-                {/* <div className="cell">Remove</div> */}
               </div>
               <div className="cart__table-body">
                 {addedItems.map((item, i) => {
@@ -132,7 +140,7 @@ export default function CartPage() {
                               <path
                                 d="M1 4.5L5 9L14 1"
                                 strokeWidth="2"
-                                stroke={isChecked[item.id] ? "#fff" : "none"}
+                                stroke={isChecked[item.id] ? "#40BFFF" : "none"}
                               />
                             </svg>
                           </label>
@@ -157,15 +165,8 @@ export default function CartPage() {
                         ></QuantityInput>
                       </div>
                       <div className="cell">
-                        <div className="item-price">
-                          {/* ${(item.price * item.productQty).toFixed(2)} */}$
-                          {item.pirce}
-                        </div>
+                        <div className="item-price">${item.pirce}</div>
                       </div>
-                      {/* <div className="cell">
-                              Remove
-        
-                            </div> */}
                     </div>
                   );
                 })}
@@ -174,23 +175,33 @@ export default function CartPage() {
             <div className="cart__options">
               <div className="top-options">
                 <div className="cart__remove">
-                  <button onClick={handleRemoveItems}>Remove item</button>
+                  <button onClick={handleRemoveItems}>Delete item</button>
                 </div>
                 <div className="cart__total">
                   <span>
-                    Total: <span className="total-price">$</span>
+                    Total:{" "}
+                    <span className="total-price">{calculateTotal()}</span>
                   </span>
                 </div>
               </div>
 
               <div className="bottom-options">
                 <div className="cart__checkout">
-                  <button>Check Out</button>
+                  <button onClick={handleCheckout}>Check Out</button>
                 </div>
               </div>
             </div>
           </div>
-        ) : (
+        ) : isCheckout ? (
+          <div className="aftercheckout-cart">
+            <span className="text">
+              Your order is succeed !{" "}
+              <Link to="/" className="link">
+                Go back for more items
+              </Link>{" "}
+            </span>
+          </div>
+        ) : !isCheckout ? (
           <div className="empty-cart">
             <span className="text">
               Your cart is empty, please{" "}
@@ -200,7 +211,7 @@ export default function CartPage() {
               to see your cart.
             </span>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

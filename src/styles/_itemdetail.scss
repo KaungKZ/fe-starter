@@ -1,0 +1,38 @@
+.itemdetail {
+  padding-top: 60px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  &__banner {
+    img {
+      width: 240px;
+    }
+  }
+
+  &__title {
+    margin-top: 25px;
+  }
+
+  &__description {
+    margin: 25px auto 0 auto;
+    width: 80%;
+
+    p {
+      text-align: center;
+    }
+  }
+
+  &__price {
+    margin: 25px 0;
+
+    span {
+      font-family: $poppin-regular;
+    }
+  }
+}

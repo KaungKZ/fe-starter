@@ -1,4 +1,4 @@
-.fixed-width-lg {
+.fixed-width-nav {
   max-width: 1200px;
   width: 1200px;
   margin: 0 auto;
@@ -15,5 +15,31 @@
     font-size: $text-3xl;
     font-family: $poppin-bold;
     color: $black-color;
+  }
+}
+
+@media (max-width: 1280px) {
+  .fixed-width-nav,
+  .fixed-width-md {
+    width: 85%;
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 600px) {
+  .fixed-width-nav {
+    width: 75%;
+    max-width: 75%;
+  }
+  .fixed-width-md {
+    width: 90%;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 470px) {
+  .fixed-width-md {
+    width: 93%;
+    max-width: 93%;
   }
 }

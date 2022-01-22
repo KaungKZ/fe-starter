@@ -3,7 +3,6 @@ import jsonData from "../assets/data/data.json";
 import ItemCard from "./ItemCard";
 
 export default function HomePage() {
-  // console.log(jsonData.data.find((d) => d.type.toLowerCase() === "cat"));
   const [data, setData] = useState([]);
   const [seemoreClicked, setSeemoreClicked] = useState([]);
 
@@ -23,26 +22,13 @@ export default function HomePage() {
     }
   }, [data]);
 
-  // console.log(data);
-
   function handleSeemoreList(d) {
-    // setData(data);
-    // console.log(items.slice(4, items.length));\
     const newSeemore = [...seemoreClicked];
     const selectedSeemore = data.findIndex((v) => v.type === d.type);
     newSeemore[selectedSeemore][d.type] = !newSeemore[selectedSeemore][d.type];
 
     setSeemoreClicked(newSeemore);
-    // setSeemoreClicked([
-    //   ...seemoreClicked,
-    //   {
-    //     [data.type]: !seemoreClicked[data.type],
-    //   },
-    // ]);
-
-    // console.log(data);
   }
-  // console.log(seemoreClicked);
 
   return (
     <section className="lists-wrapper">
@@ -54,7 +40,6 @@ export default function HomePage() {
                 <h2>{d.type}</h2>
               </div>
               <div className="list">
-                {/* {console.log(seemoreClicked[i][d.type])} */}
                 {seemoreClicked[i]?.[d.type]
                   ? d.items.map((_d, i) => {
                       return (
@@ -89,22 +74,6 @@ export default function HomePage() {
           </div>
         );
       })}
-      {/* <div className="cat fixed-width-md">
-        <div className="cat__container">
-          <div className="cat__title">
-            <h2>Cats</h2>
-          </div>
-          <div className="cat__lists">
-            {data
-              .find((d) => d.type.toLowerCase() === "cat")
-              .items.map((d, i) => {
-                return <ItemCard value={d} key={i}></ItemCard>;
-              })}
-          </div>
-        </div>
-      </div>
-      <div className="dog"></div>
-      <div className="rabbit"></div> */}
     </section>
   );
 }

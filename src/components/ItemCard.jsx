@@ -1,35 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AddedItemsContext } from "./App";
+import React from "react";
+
+import { Link } from "react-router-dom";
+import Addtocart from "./Addtocart";
 
 export default function ItemCard(props) {
-  // const [seemoreDetail, setSeemoreDetail] = useState(false);
-  const { value, type, data } = props;
-  const { addedItems, setAddedItems } = useContext(AddedItemsContext);
-
-  // console.log(items);
-
-  // console.log(value);
-
-  // function handleSeemoreDetail() {
-  //   setSeemoreDetail(() => !seemoreDetail);
-  // }
-
-  function handleAddItem(item) {
-    // console.log(type, item);
-
-    // const selectedList = data.find((d) => d.type === type);
-
-    if (addedItems.some((item) => item.id === value.id)) {
-      console.log("already exist");
-    } else {
-      setAddedItems([...addedItems, item]);
-    }
-  }
+  const { value } = props;
 
   return (
     <div className="itemcard">
       <div className="itemcard__banner">
-        <img src={value.img} alt="item-image" />
+        <img src={value.img} alt="item" />
       </div>
       <div className="itemcard__content">
         <div className="itemcard__title">
@@ -43,18 +23,51 @@ export default function ItemCard(props) {
               value.content
             )}
 
-            <a href="#" className="itemcard__seemore">
+            <Link
+              to={`/item/${value.id}`}
+              // state={value}
+              className="itemcard__seemore"
+            >
               See More
-            </a>
+            </Link>
           </p>
         </div>
         <div className="itemcard__options">
           <div className="itemcard__price">
             <span>${value.pirce}</span>
           </div>
-          <div className="itemcard__addtocart">
-            <button onClick={() => handleAddItem(value)}>Add to cart</button>
-          </div>
+          <Addtocart value={value}></Addtocart>
+          {/* <div className={`itemcard__addtocart ${addedToggle}`}>
+            <button
+              onClick={() => handleAddItem(value)}
+              disabled={addedToggle !== "initial" ? true : false}
+            >
+              {addedToggle === "added" ? (
+                <svg
+                  width="20"
+                  height="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : addedToggle === "exist" ? (
+                "Already exist !"
+              ) : addedToggle === "initial" ? (
+                "Add to Cart"
+              ) : (
+                ""
+              )}
+            </button>
+          </div> */}
         </div>
       </div>
     </div>
